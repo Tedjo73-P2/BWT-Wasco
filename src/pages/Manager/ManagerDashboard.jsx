@@ -42,8 +42,8 @@ const ManagerDashboard = () => {
     if (period === 'Daily') name = item.date ? new Date(item.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : '';
     else if (period === 'Weekly') name = `W${item.week_start?.substring(5)}`;
     else if (period === 'Quarterly') name = `${item.quarter} ${item.year}`;
-    else if (period === 'Yearly') name = item.year;
-    else name = `${item.month} ${item.year}`;
+    else if (period === 'Yearly') name = item.year || 'N/A';
+    else name = item.month && item.year ? `${item.month} ${item.year}` : (item.year || 'N/A');
 
     return {
       name,

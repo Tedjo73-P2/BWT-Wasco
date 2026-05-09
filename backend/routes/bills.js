@@ -84,6 +84,7 @@ router.get('/insights', requireRole('manager'), async (req, res) => {
                  ORDER BY year DESC, quarter DESC`;
         break;
       default:
+        query = 'SELECT * FROM usage_analytics ORDER BY year DESC, month DESC LIMIT 12';
     }
 
     const result = await billingDb.query(query);
