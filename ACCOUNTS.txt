@@ -1,0 +1,74 @@
+====================================================
+  BWT WASCO - APPLICATION ACCOUNTS REFERENCE
+  Distributed Water Bill Management System
+  Group Project
+====================================================
+
+APPLICATION URL:  http://localhost:5173
+BACKEND API:      http://localhost:5000
+
+----------------------------------------------------
+  ADMIN ACCOUNT
+----------------------------------------------------
+Role     : System Administrator
+Email    : admin@bwtwasco.com
+Password : 1234
+Name     : Tedjo73
+Access   : Full system control, user management,
+           password resets, billing rate config,
+           distributed DB monitoring
+
+----------------------------------------------------
+----------------------------------------------------
+  MANAGER ACCOUNT
+----------------------------------------------------
+Role     : Universal Operations Manager
+Email    : manager@bwtwasco.com
+Password : 1234
+Name     : Universal Manager
+Access   : View-Only Summative Insights (National)
+           Daily, Weekly, Monthly, Quarterly, Yearly
+           No individual transactions.
+           Toggle between National & District views.
+
+----------------------------------------------------
+  CUSTOMER ACCOUNTS  (Password for all: 1234)
+----------------------------------------------------
+Name                  | Email                      | Account #  | District
+----------------------|----------------------------|------------|----------
+Thato Sekhantso       | thato@bwtwasco.com         | CUST-006   | Maseru
+Liteboho Mafatlane    | liteboho@bwtwasco.com      | CUST-001   | Roma
+Lineo Makaja          | lineo@bwtwasco.com         | CUST-002   | Berea
+Tobatsi Mabula        | tobatsi@bwtwasco.com       | CUST-003   | Leribe
+Nthatuoa Ntsebeng     | nthatuoa@bwtwasco.com      | CUST-004   | Mafeteng
+Reatile               | reatile@bwtwasco.com       | CUST-005   | Maseru
+
+----------------------------------------------------
+  DATABASE CONNECTIONS
+----------------------------------------------------
+DB1 - PostgreSQL (Supabase)
+  Host     : aws-0-eu-west-1.pooler.supabase.com
+  Port     : 6543
+  Database : postgres
+  User     : postgres.cknqkuvswhduuxoxphwn
+  Tables   : Customers, BillingRates, Bills,
+             v_outstanding_balances, v_district_revenue
+
+DB2 - MySQL (Railway)
+  Host     : turntable.proxy.rlwy.net
+  Port     : 47183
+  Database : railway
+  User     : root
+  Tables   : WaterUsage, Payments, LeakageReports,
+             v_monthly_usage_trends, v_pending_leakages
+
+----------------------------------------------------
+  NOTES
+----------------------------------------------------
+- All passwords are stored as bcrypt hashes in DB
+- Admin can reset any user's password from the
+  Manage Users tab in the Admin Dashboard
+- JWT tokens expire after 1 hour
+- To re-seed data: node backend/db_scripts/seed.js
+
+====================================================
