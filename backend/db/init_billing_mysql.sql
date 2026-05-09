@@ -78,7 +78,3 @@ FROM bills
 GROUP BY YEARWEEK(created_at, 1)
 ORDER BY week_start DESC;
 
-INSERT IGNORE INTO billing_rates (tier_id, tier_name, min_usage_m3, max_usage_m3, cost_per_m3, effective_date) VALUES 
-(1, 'Tier 1', 0, 5, 5.00, '2024-01-01'),
-(2, 'Tier 2', 6, 20, 8.00, '2024-01-01'),
-(3, 'Tier 3', 21, 99999, 15.00, '2024-01-01');
