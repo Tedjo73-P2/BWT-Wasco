@@ -127,15 +127,31 @@ const LandingPage = () => {
                  { label: 'Citizen Portal', href: '/login' },
                  { label: 'Node Registration', href: '/register' }
                ].map((item, i) => (
-                 <motion.a
-                   key={i}
-                   href={item.href}
-                   onClick={() => setIsMenuOpen(false)}
-                   style={{ fontSize: '2.5rem', fontWeight: 900, color: 'white', textDecoration: 'none', letterSpacing: '-1.5px', display: 'block' }}
-                   whileHover={{ x: 20, color: 'var(--bwt-blue)' }}
-                 >
-                   {item.label}
-                 </motion.a>
+                 item.href.startsWith('#') ? (
+                   <motion.a
+                     key={i}
+                     href={item.href}
+                     onClick={() => setIsMenuOpen(false)}
+                     style={{ fontSize: '2.5rem', fontWeight: 900, color: 'white', textDecoration: 'none', letterSpacing: '-1.5px', display: 'block' }}
+                     whileHover={{ x: 20, color: 'var(--bwt-blue)' }}
+                   >
+                     {item.label}
+                   </motion.a>
+                 ) : (
+                   <Link
+                     key={i}
+                     to={item.href}
+                     onClick={() => setIsMenuOpen(false)}
+                     style={{ fontSize: '2.5rem', fontWeight: 900, color: 'white', textDecoration: 'none', letterSpacing: '-1.5px', display: 'block' }}
+                   >
+                     <motion.span 
+                       style={{ display: 'block' }}
+                       whileHover={{ x: 20, color: 'var(--bwt-blue)' }}
+                     >
+                       {item.label}
+                     </motion.span>
+                   </Link>
+                 )
                ))}
             </div>
           </motion.div>
