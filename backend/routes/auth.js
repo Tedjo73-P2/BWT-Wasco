@@ -21,6 +21,7 @@ router.post('/register', async (req, res) => {
     return res.status(400).json({ error: 'Missing required fields.' });
   }
 
+  try {
     const emailLower = email.toLowerCase().trim();
     const existing = await coreDb.query('SELECT id FROM users WHERE LOWER(email) = $1', [emailLower]);
     if (existing.rows.length > 0) {
