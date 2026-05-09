@@ -88,7 +88,7 @@ const AdminDashboard = () => {
               <FiUsers /> Manage Customer Base
             </Link>
             <Link to="/admin/rates" className="btn-outline" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem' }}>
-              <FiSettings /> Configure Billing Rates
+              <FiSettings /> Configure Billing Parameters
             </Link>
           </div>
         </div>

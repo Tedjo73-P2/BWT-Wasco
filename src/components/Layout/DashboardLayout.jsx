@@ -28,12 +28,13 @@ const DashboardLayout = ({ role }) => {
       { path: '/admin', label: 'Dashboard', icon: FiHome },
       { path: '/admin/customers', label: 'Users', icon: FiUsers },
       { path: '/admin/bills', label: 'Billing', icon: FiFileText },
-      { path: '/admin/rates', label: 'Rates', icon: FiSettings },
+      { path: '/admin/rates', label: 'Billing Parameters', icon: FiSettings },
       { path: '/admin/payments', label: 'Payments', icon: FiDollarSign },
       { path: '/admin/leakages', label: 'Leakages', icon: FiAlertCircle },
     ];
     if (role === 'manager') return [
       { path: '/manager', label: 'Strategic Overview', icon: FiPieChart },
+      { path: '/manager/rates', label: 'Billing Parameters', icon: FiSettings },
       { path: '/manager/leakages', label: 'Leakages', icon: FiAlertCircle },
     ];
     return [];

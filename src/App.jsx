@@ -120,6 +120,7 @@ function App() {
           <Route path="/manager" element={<ProtectedRoute allowedRoles={['manager']}><DashboardLayout role="manager" /></ProtectedRoute>}>
             <Route index element={<ManagerDashboard />} />
             <Route path="leakages" element={<ManageLeakages />} />
+            <Route path="rates" element={<BillingRates />} />
           </Route>
         </Routes>
       </BrowserRouter>
