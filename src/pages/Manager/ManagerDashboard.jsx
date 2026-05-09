@@ -10,7 +10,7 @@ import { FiActivity, FiDatabase, FiCpu, FiTrendingUp, FiAlertCircle, FiDownload,
 const PERIODS = ['Daily', 'Weekly', 'Monthly', 'Quarterly', 'Yearly'];
 
 const ManagerDashboard = () => {
-  const [period, setPeriod] = useState('Monthly');
+  const [period, setPeriod] = useState('Daily');
   const [insights, setInsights] = useState(null);
   const [customerStats, setCustomerStats] = useState(null);
   const [generalStats, setGeneralStats] = useState(null);
@@ -80,7 +80,7 @@ const ManagerDashboard = () => {
              <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--bwt-blue)', letterSpacing: '2px', textTransform: 'uppercase' }}>Branch Manager Insight Terminal</span>
           </div>
           <h2 style={{ margin: 0, fontSize: '2.5rem', fontWeight: 800, letterSpacing: '-1px' }}>
-            Summative <span className="gradient-text">Grid Insights</span>
+            Strategic <span className="gradient-text">Overview</span>
           </h2>
         </div>
         
