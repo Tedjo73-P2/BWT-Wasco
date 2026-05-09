@@ -37,13 +37,17 @@ const ManagerDashboard = () => {
     fetchInsights();
   }, [period]);
 
-  const chartData = (insights?.history || []).map(item => {
+  const chartData = (insights?.period === period ? (insights?.history || []) : []).map(item => {
     let name = '';
-    if (period === 'Daily') name = item.date ? new Date(item.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : '';
-    else if (period === 'Weekly') name = `W${item.week_start?.substring(5)}`;
-    else if (period === 'Quarterly') name = `${item.quarter} ${item.year}`;
-    else if (period === 'Yearly') name = item.year || 'N/A';
-    else name = item.month && item.year ? `${item.month} ${item.year}` : (item.year || 'N/A');
+    if (period === 'Daily') {
+       name = item.date ? new Date(item.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : (item.date || '');
+    }
+    else if (period === 'Weekly') {
+       name = item.week_start ? `W${item.week_start.toString().substring(5)}` : (item.week_start || '');
+    }
+    else if (period === 'Quarterly') name = (item.quarter && item.year) ? `${item.quarter} ${item.year}` : (item.quarter || item.year || '');
+    else if (period === 'Yearly') name = item.year || '';
+    else name = (item.month && item.year) ? `${item.month} ${item.year}` : (item.month || item.year || '');
 
     return {
       name,
@@ -154,7 +158,7 @@ const ManagerDashboard = () => {
           </div>
           
           <div style={{ height: '350px' }}>
-            {chartData.length > 0 ? (
+            {(!loading && chartData.length > 0) ? (
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={chartData}>
                   <defs>
@@ -238,7 +242,8 @@ const ManagerDashboard = () => {
         </div>
         
         <div style={{ height: '300px', marginBottom: '3rem' }}>
-          <ResponsiveContainer width="100%" height="100%">
+          {!loading && chartData.length > 0 ? (
+            <ResponsiveContainer width="100%" height="100%">
             <BarChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.05)" />
               <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 11, fill: 'rgba(255,255,255,0.4)' }} />
@@ -247,6 +252,11 @@ const ManagerDashboard = () => {
               <Bar dataKey="revenue" fill="var(--bwt-blue)" radius={[4, 4, 0, 0]} name="Payment Trend (M)" />
             </BarChart>
           </ResponsiveContainer>
+          ) : (
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--text-muted)' }}>
+              {loading ? 'Synchronizing payment telemetry...' : 'No fiscal trends detected.'}
+            </div>
+          )}
         </div>
 
         <div style={{ overflowX: 'auto' }}>
