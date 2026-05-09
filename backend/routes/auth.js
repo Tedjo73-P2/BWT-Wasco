@@ -21,8 +21,8 @@ router.post('/register', async (req, res) => {
     return res.status(400).json({ error: 'Missing required fields.' });
   }
 
-  try {
-    const existing = await coreDb.query('SELECT id FROM users WHERE email = $1', [email]);
+    const emailLower = email.toLowerCase().trim();
+    const existing = await coreDb.query('SELECT id FROM users WHERE LOWER(email) = $1', [emailLower]);
     if (existing.rows.length > 0) {
       return res.status(409).json({ error: 'An account with this email already exists.' });
     }
@@ -47,7 +47,7 @@ router.post('/register', async (req, res) => {
       const password_hash = await bcrypt.hash(password, SALT_ROUNDS);
       const userResult = await coreDb.query(
         `INSERT INTO users (email, password_hash, role) VALUES ($1, $2, 'customer') RETURNING id, email, role`,
-        [email, password_hash]
+        [emailLower, password_hash]
       );
       const newUser = userResult.rows[0];
 
@@ -88,23 +88,24 @@ router.post('/login', async (req, res) => {
   }
 
   try {
+    const identifier = email.trim(); // User might enter email or account number
     const result = await coreDb.query(
       `SELECT u.id, u.email, u.password_hash, u.role,
               c.full_name, c.account_number
        FROM users u
        LEFT JOIN customers c ON c.user_id = u.id
-       WHERE u.email = $1`,
-      [email]
+       WHERE LOWER(u.email) = LOWER($1) OR LOWER(c.account_number) = LOWER($1)`,
+      [identifier]
     );
 
     if (result.rows.length === 0) {
-      return res.status(401).json({ error: 'Invalid email or password.' });
+      return res.status(401).json({ error: 'Invalid identifier or password.' });
     }
 
     const user = result.rows[0];
     const valid = await bcrypt.compare(password, user.password_hash);
     if (!valid) {
-      return res.status(401).json({ error: 'Invalid email or password.' });
+      return res.status(401).json({ error: 'Invalid identifier or password.' });
     }
 
     const token = signToken(user);
