@@ -97,7 +97,7 @@ const ManagePayments = () => {
 
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem' }}>
         <div>
            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.5rem' }}>
               <FiDollarSign className="gradient-text" size={24} />
@@ -105,13 +105,6 @@ const ManagePayments = () => {
            </div>
            <p style={{ color: 'var(--text-muted)', fontSize: '1rem' }}>Global collection monitoring and fiscal node validation.</p>
         </div>
-        <button 
-          className="btn-primary" 
-          onClick={() => { setEditingPayment(null); setForm({ billId: '', amountPaid: '', paymentMethod: 'Cash', paymentDate: new Date().toISOString().split('T')[0] }); setShowAdd(true); }}
-          style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '1rem 2rem', borderRadius: '14px' }}
-        >
-          <FiPlus /> Record Manual Entry
-        </button>
       </div>
 
       <div style={{ marginBottom: '2rem', display: 'flex', gap: '1.5rem' }}>
@@ -207,19 +200,13 @@ const ManagePayments = () => {
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
                  <div>
-                    <h3 style={{ margin: 0, fontSize: '1.8rem' }}>{editingPayment ? 'Correct Entry' : 'Manual Entry'}</h3>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>{editingPayment ? `Adjusting record ${editingPayment.reference_number}` : 'Record a manual payment from the citizen terminal.'}</p>
+                    <h3 style={{ margin: 0, fontSize: '1.8rem' }}>Fiscal Correction</h3>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Adjusting record {editingPayment?.reference_number}</p>
                  </div>
                  <button onClick={() => { setShowAdd(false); setEditingPayment(null); }} style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer' }}><FiX size={24} /></button>
               </div>
               
               <form onSubmit={handleSubmit}>
-                {!editingPayment && (
-                  <div className="form-group" style={{ marginBottom: '1.5rem' }}>
-                    <label style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '0.5rem', display: 'block' }}>TARGET BILL ID</label>
-                    <input style={inputStyle} type="number" placeholder="Enter Invoice ID (e.g. 101)" value={form.billId} onChange={e => setForm({...form, billId: e.target.value})} required />
-                  </div>
-                )}
                 <div className="grid-2" style={{ gap: '1.5rem', marginBottom: '1.5rem' }}>
                   <div className="form-group">
                     <label style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '0.5rem', display: 'block' }}>COLLECTED AMOUNT (M)</label>
@@ -242,7 +229,7 @@ const ManagePayments = () => {
                 
                 <div style={{ display: 'flex', gap: '1.5rem' }}>
                   <button type="submit" className="btn-primary" style={{ flex: 1, padding: '1.25rem', borderRadius: '12px' }} disabled={processing}>
-                    {processing ? 'TRANSMITTING...' : (editingPayment ? <><FiCheck /> SYNC CORRECTION</> : <><FiDollarSign /> RECORD PAYMENT</>)}
+                    {processing ? 'TRANSMITTING...' : <><FiCheck /> SYNC CORRECTION</>}
                   </button>
                   <button type="button" className="btn-outline" style={{ flex: 1, padding: '1.25rem', borderRadius: '12px' }} onClick={() => { setShowAdd(false); setEditingPayment(null); }}>
                     ABORT
