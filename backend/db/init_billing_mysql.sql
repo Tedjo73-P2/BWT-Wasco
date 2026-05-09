@@ -70,7 +70,7 @@ SELECT
     ROUND((SUM(CASE WHEN status = 'Paid' THEN amount_due ELSE 0 END) / NULLIF(SUM(amount_due), 0)) * 100, 2) as collection_efficiency,
     COUNT(*) as total_bills
 FROM bills
-GROUP BY DATE(created_at)
+GROUP BY date
 ORDER BY date DESC;
 
 CREATE OR REPLACE VIEW weekly_usage_analytics AS
@@ -83,6 +83,6 @@ SELECT
     ROUND((SUM(CASE WHEN status = 'Paid' THEN amount_due ELSE 0 END) / NULLIF(SUM(amount_due), 0)) * 100, 2) as collection_efficiency,
     COUNT(*) as total_bills
 FROM bills
-GROUP BY YEARWEEK(created_at, 1)
+GROUP BY week_start
 ORDER BY week_start DESC;
 
