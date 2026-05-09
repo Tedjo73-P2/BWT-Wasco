@@ -49,7 +49,8 @@ const ManagerDashboard = () => {
       name,
       consumption: parseFloat(item.total_usage_m3 || 0),
       revenue: parseFloat(item.revenue || item.projected_revenue || 0),
-      bills: parseInt(item.bills_generated || item.total_bills || 0)
+      bills: parseInt(item.bills_generated || item.total_bills || 0),
+      efficiency: parseFloat(item.collection_efficiency || 0)
     };
   }).reverse();
 
@@ -272,9 +273,9 @@ const ManagerDashboard = () => {
                   <td>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                       <div style={{ flex: 1, height: '4px', background: 'rgba(255,255,255,0.05)', borderRadius: '2px' }}>
-                        <div style={{ width: '85%', height: '100%', background: 'var(--bwt-blue)', borderRadius: '2px' }}></div>
+                        <div style={{ width: `${row.efficiency}%`, height: '100%', background: 'var(--bwt-blue)', borderRadius: '2px', boxShadow: `0 0 10px ${row.efficiency > 80 ? 'var(--bwt-blue)' : 'var(--bwt-pink)'}` }}></div>
                       </div>
-                      <span style={{ fontSize: '0.8rem', fontWeight: 800 }}>85%</span>
+                      <span style={{ fontSize: '0.8rem', fontWeight: 800, color: row.efficiency > 80 ? '#00FFC2' : 'var(--bwt-pink)' }}>{row.efficiency}%</span>
                     </div>
                   </td>
                 </tr>

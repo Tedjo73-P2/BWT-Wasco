@@ -70,12 +70,15 @@ router.get('/insights', requireRole('manager'), async (req, res) => {
         break;
       case 'Yearly':
         query = `SELECT year, SUM(total_bills) as total_bills, SUM(total_usage_m3) as total_usage_m3, 
-                 SUM(projected_revenue) as revenue FROM usage_analytics GROUP BY year ORDER BY year DESC`;
+                 SUM(projected_revenue) as projected_revenue, SUM(realized_revenue) as realized_revenue,
+                 SUM(uncollected_revenue) as uncollected_revenue, ROUND(AVG(collection_efficiency), 2) as collection_efficiency
+                 FROM usage_analytics GROUP BY year ORDER BY year DESC`;
         break;
       case 'Quarterly':
         query = `SELECT year, CONCAT('Q', QUARTER(STR_TO_DATE(CONCAT('01 ', month, ' ', year), '%d %b %Y'))) as quarter,
                  SUM(total_bills) as total_bills, SUM(total_usage_m3) as total_usage_m3, 
-                 SUM(projected_revenue) as revenue 
+                 SUM(projected_revenue) as projected_revenue, SUM(realized_revenue) as realized_revenue,
+                 SUM(uncollected_revenue) as uncollected_revenue, ROUND(AVG(collection_efficiency), 2) as collection_efficiency
                  FROM usage_analytics 
                  GROUP BY year, quarter 
                  ORDER BY year DESC, quarter DESC`;
@@ -85,7 +88,7 @@ router.get('/insights', requireRole('manager'), async (req, res) => {
 
     const result = await billingDb.query(query);
     history = result.rows;
-    
+
     const monthlyRes = await billingDb.query('SELECT * FROM usage_analytics ORDER BY year DESC, month DESC LIMIT 12');
     const monthlyHistory = monthlyRes.rows;
     const totalUsageYear = monthlyHistory.reduce((sum, r) => sum + parseFloat(r.total_usage_m3), 0);
