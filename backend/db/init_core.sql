@@ -66,6 +66,6 @@ ON CONFLICT (name) DO NOTHING;
 
 -- Admins
 INSERT INTO users (email, password_hash, role) VALUES 
-('thato.admin@wasco.ls', '$2b$10$OQqHSeypYI8YPkAyu6JsaOKkvb/bOIDdxYbdCyC/mHNXnyL113f7q', 'admin'),
-('thato.manager@wasco.ls', '$2b$10$OQqHSeypYI8YPkAyu6JsaOKkvb/bOIDdxYbdCyC/mHNXnyL113f7q', 'manager')
+('admin@bwtwasco.com', '$2b$10$OQqHSeypYI8YPkAyu6JsaOKkvb/bOIDdxYbdCyC/mHNXnyL113f7q', 'admin'),
+('manager@bwtwasco.com', '$2b$10$OQqHSeypYI8YPkAyu6JsaOKkvb/bOIDdxYbdCyC/mHNXnyL113f7q', 'manager')
 ON CONFLICT (email) DO UPDATE SET password_hash = EXCLUDED.password_hash;

@@ -111,8 +111,8 @@ const BillingRates = () => {
             <tr style={{ background: 'rgba(255,255,255,0.03)' }}>
               <th style={{ padding: '1.25rem 1.5rem', fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px' }}>Tier ID</th>
               <th style={{ padding: '1.25rem 1.5rem', fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px' }}>Configuration</th>
-              <th style={{ padding: '1.25rem 1.5rem', fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px' }}>Usage Range (kL)</th>
-              <th style={{ padding: '1.25rem 1.5rem', fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px' }}>Velocity Rate (M/kL)</th>
+              <th style={{ padding: '1.25rem 1.5rem', fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px' }}>Usage Range (m3)</th>
+              <th style={{ padding: '1.25rem 1.5rem', fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px' }}>Velocity Rate (M/m3)</th>
               <th style={{ padding: '1.25rem 1.5rem', fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px' }}>Effective</th>
               <th style={{ padding: '1.25rem 1.5rem', fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', textAlign: 'right' }}>Control</th>
             </tr>
@@ -127,15 +127,15 @@ const BillingRates = () => {
                   <div style={{ fontWeight: 700, fontSize: '1rem' }}>{t.tier_name}</div>
                 </td>
                 <td style={{ padding: '1.25rem 1.5rem' }}>
-                  <span style={{ color: 'var(--text-muted)' }}>{parseFloat(t.min_usage_m3).toFixed(0)} kL</span>
+                  <span style={{ color: 'var(--text-muted)' }}>{parseFloat(t.min_usage_m3).toFixed(0)} m3</span>
                   <span style={{ margin: '0 0.5rem', opacity: 0.3 }}>→</span>
-                  <span style={{ fontWeight: 600 }}>{t.max_usage_m3 != null ? parseFloat(t.max_usage_m3).toFixed(0) + ' kL' : 'UNLIMITED'}</span>
+                  <span style={{ fontWeight: 600 }}>{t.max_usage_m3 != null ? parseFloat(t.max_usage_m3).toFixed(0) + ' m3' : 'UNLIMITED'}</span>
                 </td>
                 <td style={{ padding: '1.25rem 1.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <FiTrendingUp color="var(--bwt-pink)" size={14} />
                     <span style={{ fontSize: '1.1rem', fontWeight: 800 }}>M {parseFloat(t.cost_per_m3).toFixed(2)}</span>
-                    <span style={{ fontSize: '0.7rem', opacity: 0.5 }}>/kL</span>
+                    <span style={{ fontSize: '0.7rem', opacity: 0.5 }}>/m3</span>
                   </div>
                 </td>
                 <td style={{ padding: '1.25rem 1.5rem', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
@@ -189,17 +189,17 @@ const BillingRates = () => {
                 </div>
                 <div className="grid-2" style={{ gap: '1.5rem', marginBottom: '1.5rem' }}>
                   <div className="form-group">
-                    <label style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '0.5rem', display: 'block' }}>MIN USAGE (kL)</label>
+                    <label style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '0.5rem', display: 'block' }}>MIN USAGE (m3)</label>
                     <input type="number" style={inputStyle} value={form.minUsage} onChange={e => setForm({...form, minUsage: e.target.value})} required />
                   </div>
                   <div className="form-group">
-                    <label style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '0.5rem', display: 'block' }}>MAX USAGE (kL, ∞ = BLANK)</label>
+                    <label style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '0.5rem', display: 'block' }}>MAX USAGE (m3, ∞ = BLANK)</label>
                     <input type="number" style={inputStyle} value={form.maxUsage} onChange={e => setForm({...form, maxUsage: e.target.value})} />
                   </div>
                 </div>
                 <div className="grid-2" style={{ gap: '1.5rem', marginBottom: '2.5rem' }}>
                   <div className="form-group">
-                    <label style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '0.5rem', display: 'block' }}>VELOCITY RATE (M / kL)</label>
+                    <label style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '0.5rem', display: 'block' }}>VELOCITY RATE (M / m3)</label>
                     <input type="number" step="0.01" style={inputStyle} value={form.costPerM3} onChange={e => setForm({...form, costPerM3: e.target.value})} required />
                   </div>
                   <div className="form-group">

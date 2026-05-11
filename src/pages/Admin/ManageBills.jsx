@@ -201,11 +201,11 @@ const ManageBills = () => {
                 </div>
                 <div className="grid-2" style={{ gap: '1rem' }}>
                    <div>
-                      <label style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>PREVIOUS (kL)</label>
+                      <label style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>PREVIOUS (m3)</label>
                       <input type="number" required step="0.01" style={inputStyle} value={genForm.meterPrevious} onChange={e => setGenForm({ ...genForm, meterPrevious: e.target.value })} />
                    </div>
                    <div>
-                      <label style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>CURRENT (kL)</label>
+                      <label style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>CURRENT (m3)</label>
                       <input type="number" required step="0.01" style={inputStyle} value={genForm.meterCurrent} onChange={e => setGenForm({ ...genForm, meterCurrent: e.target.value })} />
                    </div>
                 </div>
@@ -244,7 +244,7 @@ const ManageBills = () => {
               <th style={{ padding: '1.25rem 1.5rem', fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Invoice ID</th>
               <th style={{ padding: '1.25rem 1.5rem', fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Customer Node</th>
               <th style={{ padding: '1.25rem 1.5rem', fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Cycle</th>
-              <th style={{ padding: '1.25rem 1.5rem', fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Net Usage (kL)</th>
+              <th style={{ padding: '1.25rem 1.5rem', fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Net Usage (m3)</th>
               <th style={{ padding: '1.25rem 1.5rem', fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Amount Due</th>
               <th style={{ padding: '1.25rem 1.5rem', fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Terminal Date</th>
               <th style={{ padding: '1.25rem 1.5rem', fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', textAlign: 'right' }}>Status</th>
@@ -262,7 +262,7 @@ const ManageBills = () => {
                    <div style={{ fontWeight: 700 }}>{b.account_number}</div>
                 </td>
                 <td style={{ padding: '1.25rem 1.5rem', color: 'var(--text-muted)' }}>{b.month} {b.year}</td>
-                <td style={{ padding: '1.25rem 1.5rem', fontWeight: 600 }}>{parseFloat(b.usage_m3).toFixed(2)} kL</td>
+                <td style={{ padding: '1.25rem 1.5rem', fontWeight: 600 }}>{parseFloat(b.usage_m3).toFixed(2)} m3</td>
                 <td style={{ padding: '1.25rem 1.5rem' }}>
                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                       <FiTrendingUp color="var(--bwt-blue)" size={14} />

@@ -153,7 +153,7 @@ const PayBill = () => {
                </div>
                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                   <span style={{ color: 'var(--text-muted)' }}>Usage Analysis</span>
-                  <strong>{parseFloat(selectedBill.usage_m3).toFixed(2)} kL</strong>
+                  <strong>{parseFloat(selectedBill.usage_m3).toFixed(2)} m3</strong>
                </div>
                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                   <span style={{ color: 'var(--text-muted)' }}>Node Status</span>

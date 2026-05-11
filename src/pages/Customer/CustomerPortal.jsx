@@ -114,7 +114,7 @@ const CustomerPortal = () => {
         <div className="card glass-panel">
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '2rem' }}>
              <FiActivity color="var(--bwt-blue)" />
-             <h3 style={{ margin: 0, fontSize: '1.25rem' }}>Usage Pattern (kL)</h3>
+             <h3 style={{ margin: 0, fontSize: '1.25rem' }}>Usage Pattern (m3)</h3>
           </div>
           {usageHistory.length > 0 ? (
             <div style={{ height: '300px' }}>

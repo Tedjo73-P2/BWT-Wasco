@@ -113,7 +113,7 @@ const ManagerDashboard = () => {
       <div className="grid-4" style={{ marginBottom: '3rem' }}>
         {[
           { label: 'Total Customers', val: fmt(customerStats?.totalCustomers), sub: 'National Service Segments', icon: FiDatabase, color: 'var(--bwt-blue)' },
-          { label: 'Annual Flow', val: `${fmt(insights?.summary?.totalUsageYear)} kL`, sub: 'National Usage Pattern', icon: FiCpu, color: 'white' },
+          { label: 'Annual Flow', val: `${fmt(insights?.summary?.totalUsageYear)} m3`, sub: 'National Usage Pattern', icon: FiCpu, color: 'white' },
           { label: 'Total Revenue', val: `M ${fmt(generalStats?.totalRevenue)}`, sub: 'Realized Bill Payments', icon: FiTrendingUp, color: '#00FFC2' },
           { label: 'Outstanding Amount', val: `M ${fmt(generalStats?.outstandingBalance)}`, sub: 'Current Uncollected Debt', icon: FiAlertCircle, color: 'var(--bwt-pink)' }
         ].map((s, i) => (
@@ -152,7 +152,7 @@ const ManagerDashboard = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
             <div>
               <h3 style={{ margin: 0, fontSize: '1.4rem' }}>Water Usage Patterns</h3>
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Consumption (kL) consumed across segments over time</p>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Consumption (m3) consumed across segments over time</p>
             </div>
             <FiBarChart2 color="var(--bwt-blue)" size={24} />
           </div>
@@ -265,7 +265,7 @@ const ManagerDashboard = () => {
               <tr>
                 <th>Time Interval</th>
                 <th>Grid Load (Bills)</th>
-                <th>Water Usage (kL)</th>
+                <th>Water Usage (m3)</th>
                 <th>Revenue Potential (M)</th>
                 <th>Node Efficiency</th>
               </tr>
@@ -278,7 +278,7 @@ const ManagerDashboard = () => {
                     <strong>{row.name}</strong>
                   </div></td>
                   <td>{fmt(row.bills)} units</td>
-                  <td>{fmt(row.consumption)} kL</td>
+                  <td>{fmt(row.consumption)} m3</td>
                   <td style={{ color: 'var(--bwt-blue)', fontWeight: 800 }}>M {fmtMoney(row.revenue)}</td>
                   <td>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
