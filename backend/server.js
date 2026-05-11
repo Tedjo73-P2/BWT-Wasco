@@ -31,10 +31,20 @@ app.use(express.json());
 app.post('/api/init-db', async (req, res) => {
   try {
     const initCore = fs.readFileSync(path.join(__dirname, 'db', 'init_core.sql'), 'utf8');
-    const initBilling = fs.readFileSync(path.join(__dirname, 'db', 'init_billing.sql'), 'utf8');
+    const initBilling = fs.readFileSync(path.join(__dirname, 'db', 'init_billing_mysql.sql'), 'utf8');
 
+    // PostgreSQL handles multiple statements automatically
     await coreDb.query(initCore);
-    await billingDb.query(initBilling);
+
+    // MySQL needs to split statements or have multipleStatements: true
+    const billingStatements = initBilling
+      .split(';')
+      .map(s => s.trim())
+      .filter(s => s.length > 0);
+
+    for (const statement of billingStatements) {
+      await billingDb.query(statement);
+    }
 
     res.json({ message: 'Both Core and Billing Databases initialized successfully.' });
   } catch (err) {

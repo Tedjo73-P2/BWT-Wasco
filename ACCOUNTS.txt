@@ -4,8 +4,6 @@
   Group Project
 ====================================================
 
-APPLICATION URL:  http://localhost:5173
-BACKEND API:      http://localhost:5000
 
 ----------------------------------------------------
   ADMIN ACCOUNT
